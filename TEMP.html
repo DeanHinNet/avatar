@@ -1,0 +1,283 @@
+	$urlRouterProvider.otherwise('/state');
+
+		$stateProvider
+			.state('state1', {
+				url: '/state1',
+				templateUrl: 'partials/state1.html'
+			})
+			.state()
+	
+----
+
+angular.module('configuration',[])
+	.config(function($routeProvider){
+			$routeProvider
+				.when('/', 
+			{
+				template: 'Welcome Home'
+			})
+			.when('/skills',
+			{
+				templateUrl: 'partials/skillsView.html'
+			})
+			.when('/projects',
+			{
+				templateUrl: 'partials/projectsView.html'
+			})
+			.when('/goals',
+			{
+				templateUrl: 'partials/goalsView.html'
+			})
+			.when('/works',
+			{
+				templateUrl: 'partials/worksView.html'
+			})
+		});
+----
+$scope.getValueAsync = function(){
+  $http.get('myfile.html')
+    .success(function (data, status, headers, config) {
+      return 'some async value';
+    });
+
+  return 'file not found'; // same value returned every time but $digest cycle still loops
+}
+----
+
+app.controller('MainCtrl', function($scope, $http) {
+
+  $scope.getValue = function(){
+    return 'some value';
+  }
+
+  $scope.getValueAsync = function(){
+    $http.get('myfile.html')
+      .success(function (data, status, headers, config) {
+        return 'some async value';
+      });
+
+    return 'file not found';
+  }
+});
+<div>{{getValueAsync()}}</div>
+----
+
+var upsertData = my_visit.toObject();
+
+console.log(req.body.id); // OK
+
+delete upsertData._id;
+
+models.visits.update({ _id: req.body.id }, upsertData, { multi: false }, function(err) {
+    if(err) { throw err; }
+    //...
+}
+
+----
+
+	<input type='text' ng-model='cells[skill._id+keys'>
+						<button type='submit' type='text' ng-click="updateInfo(skill._id,'name')" value='update'>
+----
+app.post('/api/skills', function(req, res) {
+		Skill.create({
+			name: req.body.name,
+			category: req.body.category,
+			sub: req.body.sub,
+			path: req.body.path,
+			points: req.body.points 
+		}, function(err, skill) {
+			if (err)
+				res.send(err);
+			Skill.find(function(err, skills) {
+				if (err)
+					res.send(err)
+				res.json(skills);
+			});
+		});
+
+	});
+	
+	<tr>
+						<td><input class='box' type="text" placeholder="Skill Name" ng-model="formData.name"></td>
+						<td><input class='box' type="text" placeholder="Category" ng-model="formData.category"></td>
+						<td><input class='box' type="text" placeholder="Sub" ng-model="formData.sub"></td>
+						<td><input class='box' type="text" placeholder="Path" ng-model="formData.path"></td>
+						<td><input class='box' type="text" placeholder="Points" ng-model="formData.points"></td>
+						<td>Stuff</td>
+						<td><button type="submit" ng-click="createSkill()">Add</button></td>
+					</tr>
+					
+<thead>
+					<th>Skill Name</th>
+					<th>Category</th>
+					<th>Sub</th>	
+					<th>Path</th>
+					<th>Points</th>
+					<th>Stuff</th>
+					<th>DELETE</th>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input class='box' type="text" placeholder="Skill Name" ng-model="formData.name"></td>
+						<td><input class='box' type="text" placeholder="Category" ng-model="formData.category"></td>
+						<td><input class='box' type="text" placeholder="Sub" ng-model="formData.sub"></td>
+						<td><input class='box' type="text" placeholder="Path" ng-model="formData.path"></td>
+						<td><input class='box' type="text" placeholder="Points" ng-model="formData.points"></td>
+						<td>Stuff</td>
+						<td><button type="submit" ng-click="createSkill()">Add</button></td>
+					</tr>
+----
+	<tr>
+							<td><input class='box' type="text" placeholder="Skill Name" ng-model="formData.name">
+				<input class='box' type="text" placeholder="Category" ng-model="formData.category">
+				<input class='box' type="text" placeholder="Sub" ng-model="formData.sub">
+				<input class='box' type="text" placeholder="Path" ng-model="formData.path">
+				<input class='box' type="text" placeholder="Points" ng-model="formData.points">
+				<button type="submit" ng-click="createSkill()">Add</button>
+			</td>
+						</tr>
+-----
+
+<div>
+				<form>
+					<input type="text" placeholder="Tasks" ng-model="formData.name">
+					<input type="text" placeholder="Category" ng-model="formData.category">
+					<input type="text" placeholder="Sub" ng-model="formData.sub">
+					<input type="text" placeholder="Path" ng-model="formData.path">
+					<input type="text" placeholder="Points" ng-model="formData.points">
+					
+				<button type="submit" ng-click="createSkill()">Add</button>
+				</form>
+			</div>
+-----
+<tr>
+						<th>
+							<input type="text" placeholder="Tasks" ng-model="formData.name">
+						</th>
+						<th>
+							<input type="text" placeholder="Category" ng-model="formData.category">
+						</th>
+						<th>
+							<input type="text" placeholder="Sub" ng-model="formData.sub">
+						</th>
+						<th>
+							<input type="text" placeholder="Path" ng-model="formData.path">
+						</th>
+						<th>
+							<input type="text" placeholder="Points" ng-model="formData.points">
+						</th>
+				<button type="submit" ng-click="createSkill()">Add</button>
+					</tr>
+-----
+
+
+	$scope.deleteSkill = function(id) {
+			Skills.delete(id)
+				.success(function(data) {
+					$scope.skills = data;
+		};
+<!-- SET THE CONTROLLER -->
+	<div ng-controller="mainController">
+		<div class="container">
+			<!-- FORM TO CREATE TODOS -->
+			<div id="todo-form" class="row">
+				<div class="col-sm-8 col-sm-offset-2 text-center">
+					<form>
+						<div class="form-group">
+
+							<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+							<input type="text" class="form-control input-lg text-center" placeholder="Tasks" ng-model="formData.text">
+						</div>
+
+						<!-- createToDo() WILL CREATE NEW TODOS -->
+						<button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+					</form>
+				</div>
+			</div>
+
+
+			<!-- TODO LIST -->
+			<div id="todo-list" class="row">
+				<div class="col-sm-4 col-sm-offset-4">
+
+					
+
+					<!-- LOOP OVER THE TODOS IN $scope.todos -->
+					<div class="checkbox" ng-repeat="todo in todos">
+						<label>
+							<input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
+						</label>
+					</div>
+
+					<p class="text-center" ng-show="loading">
+						<span class="fa fa-spinner fa-spin fa-3x"></span>
+					</p>
+
+				</div>
+			</div>
+
+
+
+		</div>
+	</div>
+<div ng-controller="skilledController">
+		<div class="container">
+			<div id="skill-form" class="row">
+				<div class="col-sm-8 col-sm-offset-2 text-center">
+					<form>
+						<div class="form-group">
+							<input type="text" class="form-control input-lg text-center" placeholder="Tasks" ng-model="formData.text">
+						</div>
+
+						<button type="submit" class="btn btn-primary btn-lg" ng-click="createSkill()">Add</button>
+					</form>
+				</div>
+			</div>
+			<div id="skill-list" class="row">
+				<div class="col-sm-4 col-sm-offset-4">
+					<div class="checkbox" ng-repeat="skill in skills">
+						<label>
+							<input type="checkbox" ng-click="deleteSkill(skill._id)"> {{skill.text}}
+						</label>
+					</div>
+					
+				</div>
+			</div>
+	</div>
+
+	<script>
+		
+		angular.module('skillController', [])
+	// inject the Todo service factory into our controller
+	.controller('skilledController', ['$scope','$http','Skills', function($scope, $http, Skills) {
+		console.log("SKILLED HERE");
+		$scope.formDataSkill = {};
+
+		// GET =====================================================================
+		// when landing on the page, get all todos and show them
+		// use the service to get all the todos
+		Skills.get()
+			.success(function(data) {
+				$scope.skills = data;
+			});
+
+		// CREATE ==================================================================
+		// when submitting the add form, send the text to the node API
+		$scope.createSKill = function() {
+			// validate the formData to make sure that something is there
+			// if form is empty, nothing will happen
+			if ($scope.formData.text != undefined) {
+
+				// call the create function from our service (returns a promise object)
+				Skills.create($scope.formData)
+
+					// if successful creation, call our get function to get all the new todos
+					.success(function(data) {
+						$scope.loading = false;
+						$scope.formData = {}; // clear the form so our user is ready to enter another
+						$scope.skills = data; // assign our new list of todos
+					});
+			}
+		};
+	}]);
+	</script>

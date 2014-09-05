@@ -1,0 +1,62 @@
+<div ng-controller="GoalsController">
+	<h1>My Goals</h1>
+
+	Mentors
+	Books
+	Videos
+	Mentors (virtual and online)
+		Elon Musk for example
+		Share virtual mentors
+		Share virtual
+	GetMotivated Buddies
+	Daily Journal
+	Daily Video
+
+	Visualizations
+	Visualize completed tasks/projects/goals and their relationships/progress
+	Vision Board (see goals, projects, task, etc and how they connect to each other)
+	See what other people's task are.
+	See what other people's projects are.
+	See what other people's goals are.
+	And help, share, collaborate on goals, projects, and tasks.
+
+	Share Anonymously (title and category)
+	Full Share (with username and details)
+	<table>
+		<thead>
+			<th>Goal Name</th>
+			<th>Labels/Categories</th>
+			<th>Skills</th>
+			<th>Actions</th>
+			<th>Projects</th>
+			<th>Notes</th>
+			<th>Progress</th>
+			<th>Resources</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input class='box' type='text' placeholder='Goal Name' ng-model='formData.name'></td>
+				<td><input class='box' type='text' placeholder='Labels' ng-model='formData.labels'></td>
+				<td><input class='box' type='text' placeholder='Skills' ng-model='formData.skills'></td>
+				<td><input class='box' type='text' placeholder='Actions' ng-model='formData.actions'></td>
+				<td><input class='box' type='text' placeholder='Projects' ng-model='formData.projects'></td>
+				<td><input class='box' type='text' placeholder='Notes' ng-model='formData.notes'></td>
+				<td><input class='box' type='text' placeholder='Progress' ng-model='formData.progress'></td>
+				<td><input class='box' type='text' placeholder='Resources' ng-model='formData.resources'></td>
+				
+				<td><button type="submit" ng-click="createGoal()">Add goal</button></td>
+			</tr>
+			<tr ng-repeat="goal in goals | filter: filter_name | orderBy:'name'">
+				<td>{{goal.name}}</td>
+				<td>{{goal.labels}}</td>
+				<td>{{goal.skills}}</td>
+				<td>{{goal.actions}}</td>
+				<td>{{goal.projects}}</td>
+				<td>{{goal.notes}}</td>
+				<td>{{goal.progress}}</td>
+				<td>{{goal.resources}}</td>
+				<td><input type='checkbox' ng-click='deleteGoal(goal._id)'></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
