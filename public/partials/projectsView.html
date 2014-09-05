@@ -1,6 +1,6 @@
 <div ng-controller="ProjectsController">
 	<h1>Project Categories</h1>
-	<div ng-repeat="project in projects | unique: 'labels'">
+	<div ng-repeat="project in projects | uniq: 'labels'">
 			{{project.labels}}
 	</div>
 

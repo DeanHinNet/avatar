@@ -73,13 +73,13 @@
 	<h1>Skill Categories</h1>
 	<div>
 		<button ng-click="select('all')">All Categories</button>
-		<div class='cats' ng-repeat="skill in skills | unique: 'category'">
+		<div class='cats' ng-repeat="skill in skills | uniq: 'category'">
 				<button ng-click='select(skill.category)'>{{skill.category}}</button>
 		</div>
 	</div>
 	<div>
 		<button>Sub Categories</button>
-		<div class='cats' ng-repeat="skill in skills | unique: 'category'">
+		<div class='cats' ng-repeat="skill in skills | uniq: 'category'">
 				<button ng-click='select(skill.sub)'>{{skill.sub}}</button>
 		</div>
 	</div>

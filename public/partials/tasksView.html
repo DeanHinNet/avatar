@@ -1,0 +1,232 @@
+<script>
+	$(document).ready(function(){
+		// $(document).on('focusout', 'input', function(){
+		// 	if ($(this).val())
+		// 	{
+		// 		$('h4').append('YES');
+		// 	}
+		// });
+		// if ($('#edit').is(':checked')) {
+		// 	$('input').toggleClass('entry');
+		// }
+
+		$('#edit').click(function(){
+			if($('#edit').is(':checked'))
+			{
+				$('#myTable > tbody > tr:not(:first) input[type=text]').removeClass('entry');
+				$('#myTable > tbody > tr:not(:first) input[type=text]').addClass('entry-on');
+			}
+			else
+			{
+				$('#myTable > tbody > tr:not(:first) input[type=text]').addClass('entry');
+				$('#myTable > tbody > tr:not(:first) input[type=text]').removeClass('entry-on');
+			}
+			$('.update-btn').toggle();
+		});
+
+		$('#doc-info-btn').click(function(){
+			$('#doc-table').toggle();
+		});
+
+	});
+</script>
+<div ng-controller="TasksController">
+	<style>
+		table{
+		    border: 1px solid black;
+		    table-layout: fixed;
+		    width: 800px;
+		}
+
+		th, td {
+		    border: 1px solid black;
+		    overflow: hidden;
+		    width: 75px;
+		}
+
+		.col-name {
+			width: 150px;
+		}
+
+		.doc-window {
+			border: 1px solid black;
+			padding: 10px;
+			margin: 10px;
+			width: 600px;
+			height: 200px;
+		}
+		.doc-window textarea {
+			display: block;
+		}
+		.doc-window div {
+			display: inline-block;
+		}
+		.doc-text {
+			width: 275px;
+			height: 150px;
+		}
+		.update-btn {
+			display: none;
+		}
+		.output {
+			display: block;
+			border: 0px;
+			padding: 2.3pt;
+		}
+		.entry {
+			display: none;
+		}
+		.entry-on {
+			width: 65px;
+		}
+		table {
+			border-collapse: collapse;
+		}
+		.cats {
+			display: inline-block;
+		}
+		.box {
+			width: 70px;
+		}
+	</style>
+	<h1>Task Categories</h1>
+	<div>
+		<button ng-click="select('all')">All Projects</button>
+		<div class='cats' ng-repeat="task in tasks | unique: 'projects'">
+				<button ng-click='select(task.projects)'>{{task.projects}}</button>
+		</div>
+	</div>
+	<div>
+		<button ng-click="select('all')">All Goals</button>
+		<div class='cats' ng-repeat="task in tasks | unique: 'goals'">
+				<button ng-click='select(task.goals)'>{{task.goals}}</button>
+		</div>
+	</div>
+	<div class="container">
+		<h1>My Tasks</h1>
+		<a href="">Show All</a>
+		<a href="">Show Completed</a>
+		<a href="">Show In Progress</a>
+		<a href="">Show Progress</a>
+		<a href="">Show Shared</a>
+		<a href="">Work on Goal Planning</a>
+		<a href="">Make some progress!</a>
+		<br>
+		<input id='edit' type='checkbox'>Edit</input>
+
+		<form ng-show='editing' class='doc-window'>
+			<div class='doc-entry'>
+				Title <button id='doc-info-btn'>Info</button>
+				<label><textarea class='doc-text' ng-model='docText'></textarea></label>
+				<button ng-click='saveDoc(docInfo._id)'>Save</button>
+				<button ng-click='stopDoc()'>Cancel</button>
+			</div>
+			<div id='doc-table'>
+				<table>
+						<tr>
+							<th>Task</th>
+							<td>{{docInfo.name}}</td>
+						</tr>
+						<tr>
+							<th>Related Projects</th>
+							<td>{{docInfo.projects}}</td>
+						</tr>
+						<tr>
+							<th>Related Goals</th>
+							<td>{{docInfo.goals}}</td>
+						</tr>
+						<tr>
+							<th>Related Skills</th>
+							<td>{{docInfo.skills}}</td>
+						</tr>
+						<tr>
+							<th>Status</th>
+							<td>{{docInfo.status}}</td>
+						</tr>
+						<tr>
+							<th>Due Date</th>
+							<td>{{docInfo.due}}</td>
+						</tr>
+						<tr>
+							<th>Date Created</th>
+							<td>{{docInfo.created}}</td>
+						</tr>
+
+				</table>
+			</div>
+		</form>
+	
+
+		<table id='myTable'>
+			<thead>
+				<th class='col-name'>Task Name</th>
+				<th>Related Projects</th>
+				<th>Related Goals</th>
+				<th>Related Skills</th>
+				<th>Status</th>
+				<th>Due Date</th>
+				<th>Date Created</th>
+				<th>Related Documents</th>
+				<th>DELETE</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td><input class='box' type="text" placeholder="Name" ng-model="formData.name"></td>
+					<td><input class='box' type="text" placeholder="Projects" ng-model="formData.projects"></td>
+					<td><input class='box' type="text" placeholder="Goals" ng-model="formData.goals"></td>
+					<td><input class='box' type="text" placeholder="Skills" ng-model="formData.skills"></td>
+					<td><input class='box' type="text" placeholder="Status" ng-model="formData.status"></td>
+					<td><input class='box' type="text" placeholder="Due Date" ng-model="formData.due"></td>
+					<td><input class='box' type="text" placeholder="" ng-model="formData.created"></td>
+					
+					<td>Document</td>
+					<td><button type="submit" ng-click="createTask()">Add</button></td>
+					<td class='update-btn'>
+						<button>Update All</button>
+					</td>
+				</tr>
+				<tr ng-repeat="task in tasks | filter: filter_name | orderBy:'name'">
+					<td>
+						<div class='output'>{{task.name}}</div><br>
+						<input class='entry' type='text' ng-model="cells[task._id.toString()+'name']" value="task.name">
+					</td>
+					<td>
+						<div class='output'>{{task.projects}}</div><br>
+						<input class='entry' type='text' ng-model="cells[task._id.toString()+'projects']" value="task.projects">
+					</td>
+					<td>
+						<div class='output'>{{task.goals}}</div><br>
+						<input class='entry' type='text' ng-model="cells[task._id.toString()+'goals']" value="task.goals">
+					</td>
+					<td>
+						<div class='output'>{{task.skills}}</div><br>
+						<input class='entry' type='text' ng-model="cells[task._id.toString()+'skills']" value="task.skills">
+					</td>
+					<td>
+						<div class='output'>{{task.status}}</div><br>
+						<input class='entry' type='text' ng-model="cells[task._id.toString()+'status']" value="task.status">
+					</td>
+					<td>
+						<div class='output'>{{task.due}}</div><br>
+						<input class='entry' type='text' ng-model="cells[task._id.toString()+'due']" value="task.due">
+					</td>
+					<td>
+						<div class='output'>{{task.created}}</div><br>
+						<input class='entry' type='text' ng-model="cells[task._id.toString()+'created']" value="task.created">
+					</td>
+					<td>
+						<button ng-click='startDoc(task._id)'>Document</button>
+					</td>
+					<td>
+						<label>
+							<input type="checkbox" ng-click="deleteTask(task._id)">
+						</label>
+					</td>
+					<td class='update-btn'>
+						<button type='text' ng-click="updateInfoAll(task._id)">UPDATE</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

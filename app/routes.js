@@ -2,8 +2,78 @@ var Skill = require('./models/skill');
 var Project = require('./models/project');
 var Goal = require('./models/goal');
 var Document = require('./models/document');
+var Task = require('./models/task');
 
 module.exports = function(app) {
+	//TASKS CRUD
+	app.post('/api/tasks', function(req, res) {
+		Task.create({
+			name: req.body.name,
+			projects: req.body.projects,
+			goals: req.body.goals,
+			skills: req.body.skills,
+			status: req.body.status,
+			due: req.body.due,
+			created: req.body.created
+		}, function(err, task) {
+			if (err)
+				res.send(err);
+			Task.find(function(err, tasks) {
+				if (err)
+					res.send(err)
+				res.json(tasks);
+			});
+		});
+
+	});
+	app.get('/api/tasks', function(req, res) {
+		Task.find(function(err, tasks) {
+			if (err)
+				res.send(err)
+			res.json(tasks); 
+		});
+	});
+	app.post('/api/tasks/update', function(req,res){
+			updateData = req.body;
+			myID = req.body._id;
+			delete updateData._id;
+			Task.update({ _id: myID}, updateData, {multi:false}, function(err, data){
+				if (err)
+					res.send(err)
+				Task.find(function(err, data){
+					if (err)
+						res.send(err);
+					res.json(data);
+				});
+			});
+	});
+	app.delete('/api/tasks/:task_id', function(req, res) {
+		Task.remove({
+			_id : req.params.task_id
+		}, function(err, tasks) {
+			if (err)
+				res.send(err);
+			Task.find(function(err, tasks) {
+				if (err)
+					res.send(err)
+				res.json(tasks);
+			});
+		});
+	});
+
+		//VIEW HELP
+	app.get('/api/tasks/select/:category', function(req,res){
+		Task.find(
+		{
+			category: req.params.category
+		}, function(err, data){
+			if (err)
+				res.send(err)
+			res.json(data);
+		});
+	});
+	//END TASKS
+
 	app.get('/api/docs/:block/:block_id', function(req,res){
 		//CHANGE TO POST AFTERWARDS!
 		Document.find(
