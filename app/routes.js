@@ -3,8 +3,33 @@ var Project = require('./models/project');
 var Goal = require('./models/goal');
 var Document = require('./models/document');
 var Task = require('./models/task');
+var User = require('./models/user');
 
 module.exports = function(app) {
+	//LOGIN
+	app.post('/signup/create', function(req,res){
+		var valid = true;
+
+		if (valid) {
+			User.create(
+			{
+				username: String,
+				first_name: String,
+				last_name: String,
+				email: String,
+				password: String,
+			}, function(err, data){
+				if (err)
+					res.json(err);
+				res.sendfile('./public/home.html');
+			});
+		}
+		else
+			res.sendfile('./public/error.html');
+	});
+	app.post('/login', function(req, res){
+		res.sendfile('./public/home.html');
+	});
 	//TASKS CRUD
 	app.post('/api/tasks', function(req, res) {
 		Task.create({

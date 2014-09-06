@@ -1,3 +1,20 @@
+<tr>
+					<td><input class='box' type="text" placeholder="Name" ng-model="formData.name"></td>
+					<td><input class='box' type="text" placeholder="Projects" ng-model="formData.projects"></td>
+					<td><input class='box' type="text" placeholder="Goals" ng-model="formData.goals"></td>
+					<td><input class='box' type="text" placeholder="Skills" ng-model="formData.skills"></td>
+					<td><input class='box' type="text" placeholder="Status" ng-model="formData.status"></td>
+					<td><input class='box' type="text" placeholder="Due Date" ng-model="formData.due"></td>
+					<td><input class='box' type="text" placeholder="" ng-model="formData.created"></td>
+					
+					<td>Document</td>
+					<td><button type="submit" ng-click="createTask()">Add</button></td>
+					<td class='update-btn'>
+						<button>Update All</button>
+					</td>
+				</tr>
+----
+
 task name
 related {projects: {}, skills:{}, goals: {}},
 status (completed, active, inactive, deferred,)

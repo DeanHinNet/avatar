@@ -6,6 +6,7 @@ angular.module('skillController', [])
 		$scope.cells = {};
 		$scope.unique = {};
 		$scope.docText = {};
+		
 
 		$scope.startDoc = function(id){
 			//Grabs Info about the skill fro $scope.skills

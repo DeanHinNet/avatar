@@ -6,7 +6,14 @@ angular.module('TasksControllerMod', [])
 		$scope.cells = {};
 		$scope.unique = {};
 		$scope.docText = {};
-
+		$scope.sorted = 'projects';
+		$scope.reverse = 'reverse';
+		
+		$scope.sortCol = function(criteria){
+			console.log(criteria);
+			$scope.sorted = criteria;
+			$scope.reverse = !$scope.reverse;
+		};
 		TasksFactory.get()
 			.success(function(data) {
 				$scope.tasks = data;

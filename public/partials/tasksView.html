@@ -27,23 +27,33 @@
 		$('#doc-info-btn').click(function(){
 			$('#doc-table').toggle();
 		});
-
 	});
 </script>
 <div ng-controller="TasksController">
 	<style>
 		table{
-		    border: 1px solid black;
+		    border: 1px solid gray;
 		    table-layout: fixed;
 		    width: 800px;
+		    border-collapse: collapse;
 		}
 
 		th, td {
-		    border: 1px solid black;
+		    border: 1px solid lightgray;
 		    overflow: hidden;
 		    width: 75px;
+		    vertical-align: bottom;
 		}
+		td div {
+			vertical-align: bottom;
+		}
+		.output {
 
+			vertical-align: top;
+		/*	display: block;
+			border: 0px;
+			padding: 2.3pt;
+*/		}
 		.col-name {
 			width: 150px;
 		}
@@ -68,20 +78,14 @@
 		.update-btn {
 			display: none;
 		}
-		.output {
-			display: block;
-			border: 0px;
-			padding: 2.3pt;
-		}
+		
 		.entry {
 			display: none;
 		}
 		.entry-on {
 			width: 65px;
 		}
-		table {
-			border-collapse: collapse;
-		}
+		
 		.cats {
 			display: inline-block;
 		}
@@ -122,7 +126,7 @@
 				<button ng-click='stopDoc()'>Cancel</button>
 			</div>
 			<div id='doc-table'>
-				<table>
+				<table class='table'>
 						<tr>
 							<th>Task</th>
 							<td>{{docInfo.name}}</td>
@@ -159,15 +163,15 @@
 
 		<table id='myTable'>
 			<thead>
-				<th class='col-name'>Task Name</th>
-				<th>Related Projects</th>
-				<th>Related Goals</th>
-				<th>Related Skills</th>
-				<th>Status</th>
-				<th>Due Date</th>
-				<th>Date Created</th>
-				<th>Related Documents</th>
-				<th>DELETE</th>
+				<th ng-click="sortCol('name')">Task Name</th>
+				<th ng-click="sortCol('projects')">Related Projects</th>
+				<th ng-click="sortCol('goals')">Related Goals</th>
+				<th ng-click="sortCol('skills')">Related Skills</th>
+				<th ng-click="sortCol('status')">Status</th>
+				<th ng-click="sortCol('due')">Due Date</th>
+				<th ng-click="sortCol('created')">Date Created</th>
+				<th ng-click="">Related Docs</th>
+				<th ng-click="">DELETE</th>
 			</thead>
 			<tbody>
 				<tr>
@@ -185,37 +189,37 @@
 						<button>Update All</button>
 					</td>
 				</tr>
-				<tr ng-repeat="task in tasks | filter: filter_name | orderBy:'name'">
+				<tr ng-repeat="task in tasks | filter: filter_name | orderBy: sorted: reverse">
 					<td>
-						<div class='output'>{{task.name}}</div><br>
+						<div class='output'>{{task.name}}</div>
 						<input class='entry' type='text' ng-model="cells[task._id.toString()+'name']" value="task.name">
 					</td>
 					<td>
-						<div class='output'>{{task.projects}}</div><br>
+						<div class='output'>{{task.projects}}</div>
 						<input class='entry' type='text' ng-model="cells[task._id.toString()+'projects']" value="task.projects">
 					</td>
 					<td>
-						<div class='output'>{{task.goals}}</div><br>
+						<div class='output'>{{task.goals}}</div>
 						<input class='entry' type='text' ng-model="cells[task._id.toString()+'goals']" value="task.goals">
 					</td>
 					<td>
-						<div class='output'>{{task.skills}}</div><br>
+						<div class='output'>{{task.skills}}</div>
 						<input class='entry' type='text' ng-model="cells[task._id.toString()+'skills']" value="task.skills">
 					</td>
 					<td>
-						<div class='output'>{{task.status}}</div><br>
+						<div class='output'>{{task.status}}</div>
 						<input class='entry' type='text' ng-model="cells[task._id.toString()+'status']" value="task.status">
 					</td>
 					<td>
-						<div class='output'>{{task.due}}</div><br>
+						<div class='output'>{{task.due}}</div>
 						<input class='entry' type='text' ng-model="cells[task._id.toString()+'due']" value="task.due">
 					</td>
 					<td>
-						<div class='output'>{{task.created}}</div><br>
+						<div class='output'>{{task.created}}</div>
 						<input class='entry' type='text' ng-model="cells[task._id.toString()+'created']" value="task.created">
 					</td>
 					<td>
-						<button ng-click='startDoc(task._id)'>Document</button>
+						<a ng-click="startDoc(task._id)">Docs</a>
 					</td>
 					<td>
 						<label>
