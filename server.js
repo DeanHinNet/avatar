@@ -8,6 +8,14 @@ var morgan   = require('morgan');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
+//User Authentication
+var exphbs = require('express-handlebars');
+var passport = require('passport');
+var	LocalStrategy = require('passport-local');
+var TwitterStrategy = require('passport-twitter');
+var GoolgeStrategy = require('passport-google');
+var FacebookStrategy = require('passport-facebook');
+var co
 // configuration ===============================================================
 mongoose.connect(database.url); 	// connect to mongoDB database on modulus.io
 

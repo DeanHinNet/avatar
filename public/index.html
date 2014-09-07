@@ -1,22 +1,93 @@
-<!DOCTYPE html>
-<html lang='en'>
+<!doctype html>
+
+<html ng-app="RealLifeAvatar">
 <head>
-	<meta char='UTF-8'>
-	<title>Login Page</title>
+	<meta charset="utf-8">
+	<title>Real Life Avatar</title>
+	<style>
+/*		html 					{ overflow-y:scroll; }
+		body 					{ padding-top:50px; }
+		.box {width: 75px;}
+		#myTable, td, tr,th {border: 1px solid black;}
+		#myTable td,th {padding: 5px;}
+		.output {
+		display: inline-block;
+		border: 1px solid black;
+		padding: 10px;
+		width: 100px;
+		}*/
+	</style>
+
+	<link rel="stylesheet" type="text/css" href="js/assets/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="js/assets/bootstrap.min.css">
+
+	<script src="js/assets/jquery.js"></script>
+	<script src="js/assets/jquery-ui.js"></script>
+	<script src="js/assets/angular.min.js"></script>
+	<script src="js/assets/angular-route.min.js"></script>
+	<script src="js/assets/angular-filter.js"></script>
+	<script src="js/assets/bootstrap.js"></script>
+
+
+	<script src="js/controllers/skills.js"></script>
+	<script src="js/controllers/projects.js"></script>
+	<script src="js/controllers/goals.js"></script>
+	<script src="js/controllers/tasks.js"></script>
+	
+
+	<script src="js/services/skill.js"></script>
+	<script src="js/services/project.js"></script>
+	<script src="js/services/goal.js"></script>
+	<script src="js/services/task.js"></script>
+
+	<script src="js/core.js"></script>
+
+	<script>
+	
+	</script>
 </head>
-<body>
-<h1>WELCOME BITCH</h1>
-<form action='/login' method='post'>
-	<label>Username <input type='text' name='username'/></label>
-	<label>Password <input type='password' name='password'/></label>
-	<input type='checkbox' value='Remember Me'>
-	<input type='submit' value='Login'>
-</form>
+<body> 
+	<a href="/">Home</a> | <a href="#/skills">Skills</a> | <a href="#/projects">Projects</a> |<a href="#/tasks">Tasks</a>| <a href="#/goals">Goals</a> | <a href="#/works">Works in Progress/Wishlists</a>|<a href="#/resources">Resources</a> | <a href="#/social">Get Social!</a>
 
-<a href="#">Forgot your password?</a>
-<a href="/signup">Create an Account</a>
+	<div ng-view="">
+	</div>
 
-
-
+	<div class='footer'>
+		Created By Dean Hin 
+		http://www.deanhin.net
+	</div>
+	
 </body>
+<script>
+angular.module('configuration',[])
+	.config(function($routeProvider){
+			$routeProvider
+			.when('/', 
+			{
+				template: 'Welcome Home'
+			})
+			.when('/skills',
+			{
+				templateUrl: 'partials/skillsView.html'
+			})
+			.when('/projects',
+			{
+				templateUrl: 'partials/projectsView.html'
+			})
+			.when('/goals',
+			{
+				templateUrl: 'partials/goalsView.html'
+			})
+			.when('/tasks',
+			{
+				templateUrl: 'partials/tasksView.html'
+			})
+			.when('/works',
+			{
+				templateUrl: 'partials/worksView.html'
+			})
+
+		});
+</script>
+
 </html>
