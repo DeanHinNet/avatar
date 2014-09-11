@@ -20,6 +20,14 @@
 		});
 	});
 </script>
+<style>
+h1 {
+	font-size: 2em;
+}
+button {
+	font-size: .9em;
+}
+</style>
 <div ng-controller="skilledController">
 	
 	<h1>Skill Categories</h1>
@@ -126,10 +134,8 @@
 					<td>
 						<button ng-click='startDoc(skill._id)'>DOC</button>
 					</td>
-					<td>
-						<label>
-							<input type="checkbox" ng-click="deleteSkill(skill._id)">
-						</label>
+					<td class='btn-del'>
+						<input type="checkbox" ng-click="deleteSkill(skill._id)">
 					</td>
 					<td class='update-btn'>
 						<button type='text' ng-click="updateInfoAll(skill._id)">UPDATE</button>

@@ -1,0 +1,106 @@
+
+/* TASKS VIEW */
+table {
+    border: 1px solid gray;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: .9em;
+}
+
+th, td {
+    border: 1px solid lightgray;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+td div {
+	vertical-align: bottom;
+}
+
+th {
+	background-color: #D8D8D8;
+	border: 1px solid #C0C0C0;
+}
+.td-entry {
+	padding: 2px;
+}
+thead, tbody {
+	display: block;
+}
+
+tbody {
+	height: 400px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+/* INSIDE TABLE*/
+
+.output {
+	vertical-align: bottom;
+}
+
+.col-name {
+	width: 150px;
+}
+
+.update-btn {
+	display: none;
+}
+
+.entry {
+	display: none;
+}
+.entry-on {
+	width: 65px;
+}
+
+.cats {
+	display: inline-block;
+}
+.box {
+	width: 80px;
+}
+.container {
+	margin: 0px;
+}
+
+span {
+	font-size: 10px;
+	text-align: right;
+}
+.btn-del {
+	text-align: center;
+	vertical-align: middle;
+}
+button {
+	font-size: 5em;
+}
+/* DOCUMENT WINDOW */
+
+.doc-window {
+	border: 1px solid black;
+	padding: 5px;
+	margin: 5px;
+	width: 500px;
+	height: 225px;
+}
+
+.doc-entry {
+	width: 325px;
+	display: inline-block;
+}
+	.doc-text {
+		width: 325px;
+		height: 180px;
+	}
+
+.doc-info {
+	width: 150px;
+	display: inline-block;
+	vertical-align: top;
+}
+	.doc-info-head {
+		font-weight: bold;
+	}
+	.doc-info table {
+		width: 150px;
+	}
