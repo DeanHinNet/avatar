@@ -1,14 +1,5 @@
 <script>
 	$(document).ready(function(){
-		// $(document).on('focusout', 'input', function(){
-		// 	if ($(this).val())
-		// 	{
-		// 		$('h4').append('YES');
-		// 	}
-		// });
-		// if ($('#edit').is(':checked')) {
-		// 	$('input').toggleClass('entry');
-		// }
 
 		$('#edit').click(function(){
 			if($('#edit').is(':checked'))
@@ -87,8 +78,8 @@
 			</div>
 		</form>
 <!--DOCUMENT SHOW END-->
-
-		<table class='tbl'>
+	
+		<table id='tbl'>
 			<thead>
 				<th ng-click="sortCol('name')">Skill Name  <span class="glyphicon glyphicon-sort"></span></th>
 				<th ng-click="sortCol('category')">Category  <span class="glyphicon glyphicon-sort"></span></th>
@@ -146,5 +137,6 @@
 				</tr>
 			</tbody>
 		</table>
+	
 	</div>
 </div>
