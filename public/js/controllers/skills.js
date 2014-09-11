@@ -6,7 +6,14 @@ angular.module('skillController', [])
 		$scope.cells = {};
 		$scope.unique = {};
 		$scope.docText = {};
+		$scope.sorted = 'projects';
+		$scope.reverse = 'reverse';
 		
+		$scope.sortCol = function(criteria){
+			console.log(criteria);
+			$scope.sorted = criteria;
+			$scope.reverse = !$scope.reverse;
+		};
 
 		$scope.startDoc = function(id){
 			//Grabs Info about the skill fro $scope.skills

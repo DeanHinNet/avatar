@@ -16,10 +16,104 @@
 		padding: 10px;
 		width: 100px;
 		}*/
+
+		.footer {
+			margin-top: 50px;
+		}
+		/* TASKS VIEW */
+		table{
+		    border: 1px solid gray;
+		    table-layout: fixed;
+		    border-collapse: collapse;
+		}
+
+		th, td {
+		    border: 1px solid lightgray;
+		    overflow: hidden;
+		    vertical-align: bottom;
+		}
+		td div {
+			vertical-align: bottom;
+		}
+	
+		th {
+			background-color: #D8D8D8;
+			border: 1px solid #C0C0C0;
+		}
+		.td-entry {
+			padding: 2px;
+		}
+		.output {
+			vertical-align: bottom;
+		}
+
+		.col-name {
+			width: 150px;
+		}
+
+		
+		.update-btn {
+			display: none;
+		}
+		
+		.entry {
+			display: none;
+		}
+		.entry-on {
+			width: 65px;
+		}
+		
+		.cats {
+			display: inline-block;
+		}
+		.box {
+			width: 80px;
+		}
+		.container {
+			margin: 0px;
+		}
+
+		span {
+			font-size: 10px;
+			text-align: right;
+		}
+		/* DOCUMENT WINDOW */
+
+		.doc-window {
+			border: 1px solid black;
+			padding: 5px;
+			margin: 5px;
+			width: 500px;
+			height: 225px;
+		}
+		
+		.doc-entry {
+			width: 325px;
+			display: inline-block;
+		}
+			.doc-text {
+				width: 325px;
+				height: 180px;
+			}
+
+		.doc-info {
+			width: 150px;
+			display: inline-block;
+			vertical-align: top;
+		}
+			.doc-info-head {
+				font-weight: bold;
+			}
+			.doc-info table {
+				width: 150px;
+			}
+		
+		
+		
 	</style>
 
 	<link rel="stylesheet" type="text/css" href="js/assets/jquery-ui.css">
-	<link rel="stylesheet" type="text/css" href="js/assets/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="js/assets/bootstrap.css">
 
 	<script src="js/assets/jquery.js"></script>
 	<script src="js/assets/jquery-ui.js"></script>
@@ -28,12 +122,10 @@
 	<script src="js/assets/angular-filter.js"></script>
 	<script src="js/assets/bootstrap.js"></script>
 
-
 	<script src="js/controllers/skills.js"></script>
 	<script src="js/controllers/projects.js"></script>
 	<script src="js/controllers/goals.js"></script>
 	<script src="js/controllers/tasks.js"></script>
-	
 
 	<script src="js/services/skill.js"></script>
 	<script src="js/services/project.js"></script>
@@ -47,14 +139,14 @@
 	</script>
 </head>
 <body> 
-	<a href="/">Home</a> | <a href="#/skills">Skills</a> | <a href="#/projects">Projects</a> |<a href="#/tasks">Tasks</a>| <a href="#/goals">Goals</a> | <a href="#/works">Works in Progress/Wishlists</a>|<a href="#/resources">Resources</a> | <a href="#/social">Get Social!</a>
+
+	<a href="/">Home</a> | <a href="#/skills">Skills</a> | <a href="#/projects">Projects</a> |<a href="#/tasks">Tasks</a>| <a href="#/goals">Goals</a> | <a href="#/works">Works in Progress/Wishlists</a>|<a href="#/resources">Resources</a> | <a href="#/social">Get Social!</a>	
 
 	<div ng-view="">
 	</div>
 
 	<div class='footer'>
-		Created By Dean Hin 
-		http://www.deanhin.net
+		Created By Dean Hin http://www.deanhin.net
 	</div>
 	
 </body>
@@ -64,7 +156,7 @@ angular.module('configuration',[])
 			$routeProvider
 			.when('/', 
 			{
-				template: 'Welcome Home'
+				templateUrl: 'partials/homeView.html'
 			})
 			.when('/skills',
 			{
@@ -85,6 +177,10 @@ angular.module('configuration',[])
 			.when('/works',
 			{
 				templateUrl: 'partials/worksView.html'
+			})
+			.when('/tour',
+			{
+				templateUrl: 'partials/tourView.html'
 			})
 
 		});

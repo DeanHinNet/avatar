@@ -30,92 +30,32 @@
 	});
 </script>
 <div ng-controller="TasksController">
-	<style>
-		table{
-		    border: 1px solid gray;
-		    table-layout: fixed;
-		    width: 800px;
-		    border-collapse: collapse;
-		}
-
-		th, td {
-		    border: 1px solid lightgray;
-		    overflow: hidden;
-		    width: 75px;
-		    vertical-align: bottom;
-		}
-		td div {
-			vertical-align: bottom;
-		}
-		.output {
-
-			vertical-align: top;
-		/*	display: block;
-			border: 0px;
-			padding: 2.3pt;
-*/		}
-		.col-name {
-			width: 150px;
-		}
-
-		.doc-window {
-			border: 1px solid black;
-			padding: 10px;
-			margin: 10px;
-			width: 600px;
-			height: 200px;
-		}
-		.doc-window textarea {
-			display: block;
-		}
-		.doc-window div {
-			display: inline-block;
-		}
-		.doc-text {
-			width: 275px;
-			height: 150px;
-		}
-		.update-btn {
-			display: none;
-		}
-		
-		.entry {
-			display: none;
-		}
-		.entry-on {
-			width: 65px;
-		}
-		
-		.cats {
-			display: inline-block;
-		}
-		.box {
-			width: 70px;
-		}
-	</style>
-	<h1>Task Categories</h1>
 	<div>
-		<button ng-click="select('all')">All Projects</button>
-		<div class='cats' ng-repeat="task in tasks | unique: 'projects'">
-				<button ng-click='select(task.projects)'>{{task.projects}}</button>
+		<h1>Task Categories</h1>
+		<div>
+			<button ng-click="select('all')">All Projects</button>
+			<div class='cats' ng-repeat="task in tasks | unique: 'projects'">
+					<button ng-click='select(task.projects)'>{{task.projects}}</button>
+			</div>
+		</div>
+		<div>
+			<button ng-click="select('all')">All Goals</button>
+			<div class='cats' ng-repeat="task in tasks | unique: 'goals'">
+					<button ng-click='select(task.goals)'>{{task.goals}}</button>
+			</div>
 		</div>
 	</div>
+
 	<div>
-		<button ng-click="select('all')">All Goals</button>
-		<div class='cats' ng-repeat="task in tasks | unique: 'goals'">
-				<button ng-click='select(task.goals)'>{{task.goals}}</button>
-		</div>
-	</div>
-	<div class="container">
 		<h1>My Tasks</h1>
-		<a href="">Show All</a>
-		<a href="">Show Completed</a>
-		<a href="">Show In Progress</a>
-		<a href="">Show Progress</a>
-		<a href="">Show Shared</a>
-		<a href="">Work on Goal Planning</a>
-		<a href="">Make some progress!</a>
-		<br>
+		<a href="">Show All</a> |
+		<a href="">Show Completed</a> |
+		<a href="">Show In Progress</a> |
+		<a href="">Show Progress</a> |
+		<a href="">Show Shared</a> |
+		<a href="">Work on Goal Planning</a> |
+		<a href="">Make some progress!</a> |
+		<br> 
 		<input id='edit' type='checkbox'>Edit</input>
 
 		<form ng-show='editing' class='doc-window'>
@@ -160,7 +100,6 @@
 			</div>
 		</form>
 	
-
 		<table id='myTable'>
 			<thead>
 				<th ng-click="sortCol('name')">Task Name</th>

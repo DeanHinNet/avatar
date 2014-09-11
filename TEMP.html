@@ -1,3 +1,71 @@
+<div class='doc-table'>
+				<table>
+						<tr>
+							<th>Skill</th>
+							<td>{{docInfo.name}}</td>
+						</tr>
+						<tr>
+							<th>Category</th>
+							<td>{{docInfo.category}}</td>
+						</tr>
+						<tr>
+							<th>Sub Category</th>
+							<td>{{docInfo.sub}}</td>
+						</tr>
+						<tr>
+							<th>Path</th>
+							<td>{{docInfo.path}}</td>
+						</tr>
+						<tr>
+							<th>Progress</th>
+							<td>{{docInfo.progress}}</td>
+						</tr>
+				</table>
+			</div>
+-----
+
+<style>
+		
+		.doc-window {
+			border: 1px solid black;
+			padding: 10px;
+			margin: 10px;
+			width: 600px;
+			height: 200px;
+		}
+		.doc-window textarea {
+			display: block;
+		}
+		.doc-window div {
+			display: inline-block;
+		}
+		.doc-text {
+			width: 275px;
+			height: 150px;
+		}
+		.update-btn {
+			display: none;
+		}
+		.output {
+			display: block;
+			border: 0px;
+			padding: 2.3pt;
+		}
+		.entry {
+			display: none;
+		}
+		.entry-on {
+			width: 75px;
+		}
+		table {
+			border-collapse: collapse;
+		}
+		.cats {
+			display: inline-block;
+		}
+	</style>
+----
+
 <tr>
 					<td><input class='box' type="text" placeholder="Name" ng-model="formData.name"></td>
 					<td><input class='box' type="text" placeholder="Projects" ng-model="formData.projects"></td>

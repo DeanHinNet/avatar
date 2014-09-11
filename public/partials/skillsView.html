@@ -30,80 +30,39 @@
 	});
 </script>
 <div ng-controller="skilledController">
-	<style>
-		
-		.doc-window {
-			border: 1px solid black;
-			padding: 10px;
-			margin: 10px;
-			width: 600px;
-			height: 200px;
-		}
-		.doc-window textarea {
-			display: block;
-		}
-		.doc-window div {
-			display: inline-block;
-		}
-		.doc-text {
-			width: 275px;
-			height: 150px;
-		}
-		.update-btn {
-			display: none;
-		}
-		.output {
-			display: block;
-			border: 0px;
-			padding: 2.3pt;
-		}
-		.entry {
-			display: none;
-		}
-		.entry-on {
-			width: 75px;
-		}
-		table {
-			border-collapse: collapse;
-		}
-		.cats {
-			display: inline-block;
-		}
-	</style>
+	
 	<h1>Skill Categories</h1>
 	<div>
 		<button ng-click="select('all')">All Categories</button>
 		<div class='cats' ng-repeat="skill in skills | uniq: 'category'">
-				<button ng-click='select(skill.category)'>{{skill.category}}</button>
+				<button ng-click='select(skill.category)' ng-show="skill.category.length > 1">{{skill.category}}</button>
+
 		</div>
 	</div>
 	<div>
-		<button>Sub Categories</button>
+		<button>All Sub Categories</button>
 		<div class='cats' ng-repeat="skill in skills | uniq: 'category'">
-				<button ng-click='select(skill.sub)'>{{skill.sub}}</button>
+				<button ng-click='select(skill.sub)' ng-show="skill.sub.length > 1">{{skill.sub}}</button>
 		</div>
 	</div>
-	<div class="container">
+	<div>
 		<h1>My Skills</h1>
-		<a href="">Show All</a>
-		<a href="">Show Completed</a>
-		<a href="">Show In Progress</a>
-		<a href="">Show Progress</a>
-		<a href="">Show Shared</a>
-		<a href="">Work on Goal Planning</a>
-		<a href="">Make some progress!</a>
+		Progress: <a href="">Show All</a>
 		<br>
 		<input id='edit' type='checkbox'>Edit</input>
 
+<!--DOCUMENT SHOW START-->
 		<form ng-show='editing' class='doc-window'>
 			<div class='doc-entry'>
-				Title <button id='doc-info-btn'>Info</button>
-				<label><textarea class='doc-text' ng-model='docText'></textarea></label>
+				<textarea class='doc-text' ng-model='docText'></textarea>
 				<button ng-click='saveDoc(docInfo._id)'>Save</button>
 				<button ng-click='stopDoc()'>Cancel</button>
 			</div>
-			<div id='doc-table'>
+			<div class='doc-info'>
 				<table>
+						<tr>
+							<td class='doc-info-head' colspan='2'>Document Info</td>
+						</tr>
 						<tr>
 							<th>Skill</th>
 							<td>{{docInfo.name}}</td>
@@ -127,16 +86,16 @@
 				</table>
 			</div>
 		</form>
-	
+<!--DOCUMENT SHOW END-->
 
-		<table id='myTable'>
+		<table class='tbl'>
 			<thead>
-				<th>Skill Name</th>
-				<th>Category</th>
-				<th>Sub</th>	
-				<th>Path</th>
-				<th>Points</th>
-				<th>Document</th>
+				<th ng-click="sortCol('name')">Skill Name  <span class="glyphicon glyphicon-sort"></span></th>
+				<th ng-click="sortCol('category')">Category  <span class="glyphicon glyphicon-sort"></span></th>
+				<th ng-click="sortCol('sub')">Sub  <span class="glyphicon glyphicon-sort"></span></th>	
+				<th ng-click="sortCol('path')">Path  <span class="glyphicon glyphicon-sort"></span></th>
+				<th ng-click="sortCol('points')">Progress  <span class="glyphicon glyphicon-sort"></span></th>
+				<th>.DOC</th>
 				<th>DELETE</th>
 			</thead>
 			<tbody>
@@ -146,35 +105,35 @@
 					<td><input class='box' type="text" placeholder="Sub" ng-model="formData.sub"></td>
 					<td><input class='box' type="text" placeholder="Path" ng-model="formData.path"></td>
 					<td><input class='box' type="text" placeholder="Points" ng-model="formData.points"></td>
-					<td>Document</td>
+					<td>DOC</td>
 					<td><button type="submit" ng-click="createSkill()">Add</button></td>
 					<td class='update-btn'>
 						<button>Update All</button>
 					</td>
 				</tr>
-				<tr ng-repeat="skill in skills | filter: filter_name | orderBy:'name'">
-					<td>
-						<div class='output'>{{skill.name}}</div><br>
+				<tr ng-repeat="skill in skills | filter: filter_name | orderBy: sorted: reverse">
+					<td class='td-entry'>
+						<div class='output'>{{skill.name}}</div>
 						<input class='entry' type='text' ng-model="cells[skill._id.toString()+'name']" value="skill.name">
 					</td>
-					<td>
+					<td class='td-entry'>
 						<div class='output'>{{skill.category}}</div>
 						<input class='entry' type='text' ng-model="cells[skill._id.toString()+'category']">
 					</td>
-					<td>
+					<td class='td-entry'>
 						<div class='output'>{{skill.sub}}</div>
 						<input class='entry' type='text' ng-model="cells[skill._id.toString()+'sub']">
 					</td>
-					<td>
+					<td class='td-entry'>
 						<div class='output'>{{skill.path}}</div>
 						<input class='entry' type='text' ng-model="cells[skill._id.toString()+'path']">
 					</td>
-					<td>
+					<td class='td-entry'>
 						<div class='output'>{{skill.points}}</div>
 						<input class='entry' type='text' ng-model="cells[skill._id.toString()+'points']">
 					</td>
 					<td>
-						<button ng-click='startDoc(skill._id)'>Document</button>
+						<button ng-click='startDoc(skill._id)'>DOC</button>
 					</td>
 					<td>
 						<label>
