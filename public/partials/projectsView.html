@@ -1,54 +1,146 @@
+<script src='js/avatar.js'></script>
 <div ng-controller="ProjectsController">
 	
-	<h1>Project Categories</h1>
-	<div ng-repeat="project in projects | uniq: 'labels'">
-			{{project.labels}}
+	<h1>Projects: Related Goals and Skills</h1>
+	<div>
+		<button ng-click="select('all', 'all')">All Goals</button>
+		<div class='cats' ng-repeat="project in projects | uniq: 'goals'">
+				<button ng-click="select('goals', project.goals)" ng-show="project.goals.length > 1">{{project.goals}}</button>
+		</div>
 	</div>
+	<div>
+		<button ng-click="select('all', 'all')">All Skills</button>
+		<div class='cats' ng-repeat="project in projects | uniq: 'skills'">
+				<button ng-click="select('skills', project.skills)" ng-show="project.skills.length > 1">{{project.skills}}</button>
 
-	<h1>My Projects</h1>
-	<a href="">Show All</a> |
-	<a href="">Show Completed</a> |
-	<a href="">Show In Progress</a> |
-	<a href="">Show Progress</a> |
-	<a href="">Show Shared</a> |
-	<a href="">Work on Goal Planning</a> |
-	<a href="">Make some progress!</a> 
+		</div>
+	</div>
+	<div>
+		<h1>My Projects-BETA</h1>
+		Progress: <a href="">Show All</a>
+		<br>
+		<input id='edit' type='checkbox'>Edit</input>
+
+<!--DOCUMENT SHOW START-->
+		<form ng-show='editing' class='doc-window'>
+			<div class='doc-entry'>
+				<textarea class='doc-text' ng-model='docText'></textarea>
+				<button ng-click='saveDoc(docInfo._id)'>Save</button>
+				<button ng-click='stopDoc()'>Cancel</button>
+			</div>
+			<div class='doc-info'>
+				<table>
+						<tr>
+							<td class='doc-info-head' colspan='2'>Document Info</td>
+						</tr>
+						<tr>
+							<th>Project</th>
+							<td>{{docInfo.name}}</td>
+						</tr>
+						<tr>
+							<th>Category</th>
+							<td>{{docInfo.category}}</td>
+						</tr>
+						<tr>
+							<th>Sub Category</th>
+							<td>{{docInfo.sub}}</td>
+						</tr>
+						<tr>
+							<th>Path</th>
+							<td>{{docInfo.path}}</td>
+						</tr>
+						<tr>
+							<th>Progress</th>
+							<td>{{docInfo.progress}}</td>
+						</tr>
+				</table>
+			</div>
+		</form>
+<!--DOCUMENT SHOW END-->
 	
-	<table>
-		<thead>
-			<th>Project Name</th>
-			<th>Categories</th>
-			<th>Skills</th>
-			<th>Actions</th>
-			<th>Goals</th>
-			<th>Notes</th>
-			<th>Progress</th>
-			<th>Resources</th>
-		</thead>
-		<tbody>
-			<tr>
-				<td><input class='box' type='text' placeholder='Project Name' ng-model='formData.name'></td>
-				<td><input class='box' type='text' placeholder='Labels' ng-model='formData.labels'></td>
-				<td><input class='box' type='text' placeholder='Skills' ng-model='formData.skills'></td>
-				<td><input class='box' type='text' placeholder='Actions' ng-model='formData.actions'></td>
-				<td><input class='box' type='text' placeholder='Goals' ng-model='formData.goals'></td>
-				<td><input class='box' type='text' placeholder='Notes' ng-model='formData.notes'></td>
-				<td><input class='box' type='text' placeholder='Progress' ng-model='formData.progress'></td>
-				<td><input class='box' type='text' placeholder='Resources' ng-model='formData.resources'></td>
+		<table id='tbl'>
+			<thead>
+				<th ng-click="sortCol('name')">Project Name  <span class="glyphicon glyphicon-sort"></span></th>
+				<th ng-click="sortCol('categories')">Categories  <span class="glyphicon glyphicon-sort"></span></th>
+				<th ng-click="sortCol('progress')">Progress <span class="glyphicon glyphicon-sort"></span></th>
+				<th ng-click="sortCol('status')">Status <span class="glyphicon glyphicon-sort"></span></th>
+				<th ng-click="sortCol('notes')">Notes  <span class="glyphicon glyphicon-sort"></span></th>
+				<th ng-click="sortCol('resources')">Resources  <span class="glyphicon glyphicon-sort"></span></th>
+				<th ng-click="sortCol('skills')">Related Skills <span class="glyphicon glyphicon-sort"></span></th>	
+				<th ng-click="sortCol('actions')">Related Tasks  <span class="glyphicon glyphicon-sort"></span></th>
+				<th ng-click="sortCol('goals')">Related Goals  <span class="glyphicon glyphicon-sort"></span></th>
 				
-				<td><button type="submit" ng-click="createProject()">Add Project</button></td>
-			</tr>
-			<tr ng-repeat="project in projects | filter: filter_name | orderBy:'name'">
-				<td>{{project.name}}</td>
-				<td>{{project.labels}}</td>
-				<td>{{project.skills}}</td>
-				<td>{{project.actions}}</td>
-				<td>{{project.goals}}</td>
-				<td>{{project.notes}}</td>
-				<td>{{project.progress}}</td>
-				<td>{{project.resources}}</td>
-				<td><input type='checkbox' ng-click='deleteProject(project._id)'></td>
-			</tr>
-		</tbody>
-	</table>
+				<th>DOC</th>
+				<th>DELETE</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td><input class='box' type='text' placeholder='Project Name' ng-model='formData.name'></td>
+					<td><input class='box' type='text' placeholder='Categories' ng-model='formData.categories'></td>
+					<td><input class='box' type='text' placeholder='Progress' ng-model='formData.progress'></td>
+					<td><input class='box' type='text' placeholder='Status' ng-model='formData.status'></td>
+					<td><input class='box' type='text' placeholder='Notes' ng-model='formData.notes'></td>
+					<td><input class='box' type='text' placeholder='Resources' ng-model='formData.resources'></td>
+					<td><input class='box' type='text' placeholder='Skills' ng-model='formData.skills'></td>
+					<td><input class='box' type='text' placeholder='Tasks' ng-model='formData.tasks'></td>
+					<td><input class='box' type='text' placeholder='Goals' ng-model='formData.goals'></td>
+					
+					<td><button ng-click='clearEntry()'>clear</button></td>
+					<td><button type="submit" ng-click="createProject()">Add</button></td>
+					<td class='update-btn'>
+						<button>Update All</button>
+					</td>
+				</tr>
+				<tr ng-repeat="project in projects | filter: filter_name | orderBy: sorted: reverse">
+					<td class='td-entry'>
+						<div class='output'>{{project.name}}</div>
+						<input class='entry-off' type='text' ng-model="cells[project._id.toString()+'name']" value="project.name">
+					</td>
+					<td class='td-entry'>
+						<div class='output'>{{project.categories}}</div>
+						<input class='entry-off' type='text' ng-model="cells[project._id.toString()+'categories']">
+					</td>
+
+					<td class='td-entry'>
+						<div class='output'>{{project.progress}}</div>
+						<input class='entry-off' type='text' ng-model="cells[project._id.toString()+'progress']">
+					</td>
+					<td class='td-entry'>
+						<div class='output'>{{project.status}}</div>
+						<input class='entry-off' type='text' ng-model="cells[project._id.toString()+'status']">
+					</td>
+					<td class='td-entry'>
+						<div class='output'>{{project.notes}}</div>
+						<input class='entry-off' type='text' ng-model="cells[project._id.toString()+'notes']">
+					</td>
+					<td class='td-entry'>
+						<div class='output'>{{project.resources}}</div>
+						<input class='entry-off' type='text' ng-model="cells[project._id.toString()+'resources']">
+					</td>
+					<td class='td-entry'>
+						<div class='output'>{{project.skills}}</div>
+						<input class='entry-off' type='text' ng-model="cells[project._id.toString()+'skills']">
+					</td>
+					<td class='td-entry'>
+						<div class='output'>{{project.tasks}}</div>
+						<input class='entry-off' type='text' ng-model="cells[project._id.toString()+'tasks']">
+					</td>
+					<td class='td-entry'>
+						<div class='output'>{{project.goals}}</div>
+						<input class='entry-off' type='text' ng-model="cells[project._id.toString()+'goals']">
+					</td>
+					<td>
+						<button ng-click='startDoc(project._id)'>DOC</button>
+					</td>
+					<td class='btn-del'>
+						<input type="checkbox" ng-click="deleteProject(project._id)">
+					</td>
+					<td class='update-btn'>
+						<button type='text' ng-click="updateInfoAll(project._id)">UPDATE</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	
+	</div>
 </div>

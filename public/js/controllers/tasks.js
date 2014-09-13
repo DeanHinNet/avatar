@@ -27,7 +27,9 @@ angular.module('TasksControllerMod', [])
 					});
 			}
 		};
-
+		$scope.clearEntry = function(){
+			$scope.formData = {};
+		};
 		$scope.updateInfo = function(id, key) {
 			entry = {};
 			entry['_id']=id;
@@ -96,7 +98,7 @@ angular.module('TasksControllerMod', [])
 			$scope.editing = false;
 		};
 
-		$scope.select = function(selection){
+		$scope.select = function(related, selection){
 			if (selection=='all'){
 				TasksFactory.get()
 					.success(function(data) {
@@ -105,7 +107,7 @@ angular.module('TasksControllerMod', [])
 			}
 			else
 			{
-				TasksFactory.select(selection)
+				TasksFactory.select(related, selection)
 					.success(function(data) {
 						$scope.tasks = data;
 					});

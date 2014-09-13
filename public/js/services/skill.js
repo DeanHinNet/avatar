@@ -16,7 +16,6 @@ angular.module('skillService', [])
 				return $http.post('/api/skills/update',data);
 			},
 			select: function(selection){
-				console.log(selection);
 				return $http.get('/api/skills/select/'+selection);
 			},
 			readDoc: function(block,blockId){

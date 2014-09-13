@@ -87,11 +87,20 @@ module.exports = function(app) {
 	});
 
 		//VIEW HELP
-	app.get('/api/tasks/select/:category', function(req,res){
-		Task.find(
-		{
-			category: req.params.category
-		}, function(err, data){
+	app.get('/api/tasks/:related/:name', function(req,res){
+		var query = {};
+		query[req.params.related] = req.params.name;
+		console.log(query);
+		Task.find(query, function(err, data){
+			if (err)
+				res.send(err)
+			res.json(data);
+		});
+	});
+	app.get('/api/projects/:related/:name', function(req,res){
+		var query = {};
+		query[req.params.related] = req.params.name;
+		Project.find(query, function(err, data){
 			if (err)
 				res.send(err)
 			res.json(data);

@@ -118,10 +118,15 @@ angular.module('skillController', [])
 			if ($scope.formData.name != undefined) {
 				SkillsFactory.create($scope.formData)
 					.success(function(data) {
-						$scope.formData = {};
+						$scope.formData.name = "";
+						$scope.formData.points = "";
 						$scope.skills = data;
 					});
 			}
+		};
+
+			$scope.clearEntry = function(){
+			$scope.formData = {};
 		};
 	}
 	]);

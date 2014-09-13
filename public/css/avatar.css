@@ -46,11 +46,12 @@ tbody {
 	display: none;
 }
 
-.entry {
+.entry-off {
 	display: none;
 }
 .entry-on {
-	width: 65px;
+	height: 20px;
+	width: 75px;
 }
 
 .cats {
@@ -103,4 +104,6 @@ button {
 	}
 	.doc-info table {
 		width: 150px;
+		height: 50px;
+		border: none;
 	}

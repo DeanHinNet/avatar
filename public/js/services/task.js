@@ -14,8 +14,8 @@ angular.module('TaskServiceMod', [])
 			update : function(data) {
 				return $http.post('/api/tasks/update',data);
 			},
-			select: function(selection){
-				return $http.get('/api/tasks/select/'+selection);
+			select: function(related, selection){
+				return $http.get('/api/tasks/'+related+'/'+selection);
 			},
 			readDoc: function(block,blockId){
 				return $http.get('/api/docs/'+block+'/'+blockId)

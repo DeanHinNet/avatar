@@ -2,11 +2,13 @@ var mongoose = require('mongoose');
 
 module.exports = mongoose.model('Project', {
 	name:  String,
-	skills: String,
-	actions: String,
-	goals: String,
-	notes: String,
+	categories: String,
 	progress: Number,
-	labels: String,
-	resources: String
+	status: String,
+	notes: String,
+	resources: String,
+	skills: String,
+	tasks: String,
+	goals: String
+
 });

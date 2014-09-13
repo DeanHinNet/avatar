@@ -1,10 +1,41 @@
-<script src="js/avatar.js"></script>
+<script>
+	$(document).ready(function(){
+
+		$('#edit').click(function(){
+			if($('#edit').is(':checked'))
+			{
+				$('#myTable > tbody > tr:not(:first) input[type=text]').removeClass('entry');
+				$('#myTable > tbody > tr:not(:first) input[type=text]').addClass('entry-on');
+			}
+			else
+			{
+				$('#myTable > tbody > tr:not(:first) input[type=text]').addClass('entry');
+				$('#myTable > tbody > tr:not(:first) input[type=text]').removeClass('entry-on');
+			}
+			$('.update-btn').toggle();
+		});
+
+		$('#doc-info-btn').click(function(){
+			$('#doc-table').toggle();
+		});
+	});
+</script>
+<style>
+h1 {
+	font-size: 2em;
+}
+button {
+	font-size: .9em;
+}
+</style>
 <div ng-controller="skilledController">
+	
 	<h1>Skill Categories</h1>
 	<div>
 		<button ng-click="select('all')">All Categories</button>
 		<div class='cats' ng-repeat="skill in skills | uniq: 'category'">
 				<button ng-click='select(skill.category)' ng-show="skill.category.length > 1">{{skill.category}}</button>
+
 		</div>
 	</div>
 	<div>
@@ -73,31 +104,32 @@
 					<td><input class='box' type="text" placeholder="Sub" ng-model="formData.sub"></td>
 					<td><input class='box' type="text" placeholder="Path" ng-model="formData.path"></td>
 					<td><input class='box' type="text" placeholder="Points" ng-model="formData.points"></td>
-					<td><button ng-click='clearEntry()'>clear</button></td>
+					<td>DOC</td>
 					<td><button type="submit" ng-click="createSkill()">Add</button></td>
 					<td class='update-btn'>
+						<button>Update All</button>
 					</td>
 				</tr>
 				<tr ng-repeat="skill in skills | filter: filter_name | orderBy: sorted: reverse">
 					<td class='td-entry'>
 						<div class='output'>{{skill.name}}</div>
-						<input class='entry-off' type='text' ng-model="cells[skill._id.toString()+'name']" value="skill.name">
+						<input class='entry' type='text' ng-model="cells[skill._id.toString()+'name']" value="skill.name">
 					</td>
 					<td class='td-entry'>
 						<div class='output'>{{skill.category}}</div>
-						<input class='entry-off' type='text' ng-model="cells[skill._id.toString()+'category']">
+						<input class='entry' type='text' ng-model="cells[skill._id.toString()+'category']">
 					</td>
 					<td class='td-entry'>
 						<div class='output'>{{skill.sub}}</div>
-						<input class='entry-off' type='text' ng-model="cells[skill._id.toString()+'sub']">
+						<input class='entry' type='text' ng-model="cells[skill._id.toString()+'sub']">
 					</td>
 					<td class='td-entry'>
 						<div class='output'>{{skill.path}}</div>
-						<input class='entry-off' type='text' ng-model="cells[skill._id.toString()+'path']">
+						<input class='entry' type='text' ng-model="cells[skill._id.toString()+'path']">
 					</td>
 					<td class='td-entry'>
 						<div class='output'>{{skill.points}}</div>
-						<input class='entry-off' type='text' ng-model="cells[skill._id.toString()+'points']">
+						<input class='entry' type='text' ng-model="cells[skill._id.toString()+'points']">
 					</td>
 					<td>
 						<button ng-click='startDoc(skill._id)'>DOC</button>

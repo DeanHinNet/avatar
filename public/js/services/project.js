@@ -12,6 +12,9 @@ angular.module('ProjectServiceMod', [])
 			},
 			delete : function(id) {
 				return $http.delete('/api/projects/' + id);
+			},
+			select: function(related, selection){
+				return $http.get('/api/projects/'+related+'/'+selection);
 			}
 		}
 	}]);

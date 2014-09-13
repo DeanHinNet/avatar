@@ -28,30 +28,12 @@
 
 	<script src="js/core.js"></script>
 
-	<script>
-	$(document).ready(function(){
-		$(window).click(function() {
-				var $table = $('#tbl'),
-		    $bodyCells = $table.find('tbody tr:first').children(), colWidth;
-		   
-		    // Get the tbody columns width array
-		    colWidth = $bodyCells.map(function() {
-		        return $(this).width();
-		    }).get();
-		    
-		    // Set the width of thead columns
-		    $table.find('thead tr').children().each(function(i, v) {
-		        $(v).width(colWidth[i]);
-		    });
-		});
-	});
-	</script>
 </head>
 <body> 
-
-	<a href="/">Home</a> | <a href="#/skills">Skills</a> 
-	<!--
-	WORKS IN PROGRESS| <a href="#/projects">Projects</a> |<a href="#/tasks">Tasks</a>| <a href="#/goals">Goals</a> | <a href="#/works">Works in Progress/Wishlists</a>|<a href="#/resources">Resources</a> | <a href="#/social">Get Social!</a>	-->
+	
+	<a href="/">Home</a> | <a href="#/skills">Skills</a> | <a href="#/tasks">Tasks</a><br>
+	
+	BETA VERSION: <a href="#/projects">Projects</a> | <a href="#/goals">Goals</a> | <a href="#/works">Works </a>| <a href="#/resources">Resources</a> | <a href="#/social">Get Social!</a>
 
 	<div ng-view="">
 	</div>
@@ -59,8 +41,11 @@
 	<div class='footer'>
 		Created By Dean Hin http://www.deanhin.net
 	</div>
+	
 </body>
+
 <script>
+
 angular.module('configuration',[])
 	.config(function($routeProvider){
 			$routeProvider
@@ -87,6 +72,14 @@ angular.module('configuration',[])
 			.when('/works',
 			{
 				templateUrl: 'partials/worksView.html'
+			})
+			.when('/resources',
+			{
+				templateUrl: 'partials/resourcesView.html'
+			})
+			.when('/social',
+			{
+				templateUrl: 'partials/socialView.html'
 			})
 			.when('/tour',
 			{
