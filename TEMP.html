@@ -1,3 +1,53 @@
+	$scope.display = {
+			name: true;
+			projects: true;
+			goals: true;
+			skills: true;
+			due: true;
+			created: true;
+		};
+<!--DOCUMENT SHOW START-->
+		<form ng-show='docEdit' class='doc-window'>
+			<div class='doc-entry'>
+				<textarea class='doc-text' ng-model='docText'></textarea>
+				<button ng-click='saveDoc(docInfo._id)'>Save</button>
+				<button ng-click='stopDoc()'>Cancel</button>
+			</div>
+			<div class='doc-info'>
+				<table>
+						<tr>
+							<td class='doc-info-head' colspan='2'>Document Info</td>
+						</tr>
+						<tr>
+							<th>Task</th>
+							<td>{{docInfo.name}}</td>
+						</tr>
+						<tr>
+							<th>Category</th>
+							<td>{{docInfo.category}}</td>
+						</tr>
+						<tr>
+							<th>Sub Category</th>
+							<td>{{docInfo.sub}}</td>
+						</tr>
+						<tr>
+							<th>Path</th>
+							<td>{{docInfo.path}}</td>
+						</tr>
+						<tr>
+							<th>Progress</th>
+							<td>{{docInfo.progress}}</td>
+						</tr>
+				</table>
+			</div>
+		</form>
+<!--DOCUMENT SHOW END-->
+----
+<input id='edit' type='checkbox'>Edit</input>
+
+ng-click="updateInfoAll(task._id)"
+
+----
 	<table class='new'>
 			<thead>
 				<th ng-repeat="(key,value) in skills">{{key}}</th>

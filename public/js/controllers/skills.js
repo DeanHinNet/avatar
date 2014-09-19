@@ -8,7 +8,11 @@ angular.module('skillController', [])
 		$scope.docText = {};
 		$scope.sorted = 'projects';
 		$scope.reverse = 'reverse';
-		
+		$scope.editing = false;
+
+		$scope.editFields = function(){
+			$scope.editing = !$scope.editing;
+		};
 		$scope.sortCol = function(criteria){
 			console.log(criteria);
 			$scope.sorted = criteria;
@@ -21,7 +25,7 @@ angular.module('skillController', [])
 				return (data._id==id) ? true:false;
 			});
 			$scope.docInfo = object[0];
-			$scope.editing = true;
+			$scope.docEdit = true;
 
 			//grab the document from the database
 			SkillsFactory.readDoc('skills', id)
@@ -48,7 +52,7 @@ angular.module('skillController', [])
 		};
 
 		$scope.stopDoc = function(){
-			$scope.editing = false;
+			$scope.docEdit = false;
 		};
 
 		$scope.select = function(selection){
@@ -72,9 +76,6 @@ angular.module('skillController', [])
 				$scope.skills = data;
 			});
 		
-		$scope.compute = function(id, key){
-
-		};
 		$scope.updateInfo = function(id, key) {
 			entry = {};
 			entry['_id']=id;
@@ -88,7 +89,8 @@ angular.module('skillController', [])
 			// 		$scope.skills = data;
 			 })
 		};
-		$scope.updateInfoAll = function(id, key) {
+		
+		$scope.updateInfoAll = function(id) {
 			myID = id.toString();
 			entry = {};
 			entry['_id']=id;

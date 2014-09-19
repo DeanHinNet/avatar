@@ -17,10 +17,10 @@
 		<h1>My Skills</h1>
 		Progress: <a href="">Show All</a>
 		<br>
-		<input id='edit' type='checkbox'>Edit</input>
+		<input type='checkbox' ng-click='editFields()'>Edit</input>
 
 <!--DOCUMENT SHOW START-->
-		<form ng-show='editing' class='doc-window'>
+		<form ng-show='docEdit' class='doc-window'>
 			<div class='doc-entry'>
 				<textarea class='doc-text' ng-model='docText'></textarea>
 				<button ng-click='saveDoc(docInfo._id)'>Save</button>
@@ -81,23 +81,23 @@
 				<tr ng-repeat="skill in skills | filter: filter_name | orderBy: sorted: reverse">
 					<td class='td-entry'>
 						<div class='output'>{{skill.name}}</div>
-						<input class='entry-off' type='text' ng-model="cells[skill._id.toString()+'name']" value="skill.name">
+						<input class='entry' ng-show='editing' type='text' ng-model="cells[skill._id.toString()+'name']" value="skill.name">
 					</td>
 					<td class='td-entry'>
 						<div class='output'>{{skill.category}}</div>
-						<input class='entry-off' type='text' ng-model="cells[skill._id.toString()+'category']">
+						<input class='entry' ng-show='editing' type='text' ng-model="cells[skill._id.toString()+'category']">
 					</td>
 					<td class='td-entry'>
 						<div class='output'>{{skill.sub}}</div>
-						<input class='entry-off' type='text' ng-model="cells[skill._id.toString()+'sub']">
+						<input class='entry' ng-show='editing' type='text' ng-model="cells[skill._id.toString()+'sub']">
 					</td>
 					<td class='td-entry'>
 						<div class='output'>{{skill.path}}</div>
-						<input class='entry-off' type='text' ng-model="cells[skill._id.toString()+'path']">
+						<input class='entry' ng-show='editing' type='text' ng-model="cells[skill._id.toString()+'path']">
 					</td>
 					<td class='td-entry'>
 						<div class='output'>{{skill.points}}</div>
-						<input class='entry-off' type='text' ng-model="cells[skill._id.toString()+'points']">
+						<input class='entry' ng-show='editing' type='text' ng-model="cells[skill._id.toString()+'points']">
 					</td>
 					<td>
 						<button ng-click='startDoc(skill._id)'>DOC</button>
@@ -105,8 +105,8 @@
 					<td class='btn-del'>
 						<input type="checkbox" ng-click="deleteSkill(skill._id)">
 					</td>
-					<td class='update-btn'>
-						<button type='text' ng-click="updateInfoAll(skill._id)">UPDATE</button>
+					<td ng-show='editing'>
+						<button ng-click="updateInfoAll(skill._id)">UPDATE</button>
 					</td>
 				</tr>
 			</tbody>

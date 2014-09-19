@@ -1,6 +1,5 @@
 <script src="js/avatar.js"></script>
 <div ng-controller="TasksController">
-	
 	<h1>Tasks: Related Projects and Goals</h1>
 	<div>
 		<button ng-click="select('all', 'all')">All Projects</button>
@@ -20,10 +19,19 @@
 		<h1>My Tasks</h1>
 		Progress: <a href="">Show All</a>
 		<br>
-		<input id='edit' type='checkbox'>Edit</input>
-
+		<input type='checkbox' ng-click='editFields()'>Edit</input>
+		<button ng-click="displayToggle('fieldSelect')">FIELDS</button>
+		<div ng-show='display.fieldSelect' class='displaySelection'>
+			<label><input type='checkbox' ng-click="displayToggle('projects')">Projects</label>
+			<label><input type='checkbox' ng-click="displayToggle('goals')">Goals</label>
+			<label><input type='checkbox' ng-click="displayToggle('skills')">Skills</label>
+			<label><input type='checkbox' ng-click="displayToggle('status')">Status</label>
+			<label><input type='checkbox' ng-click="displayToggle('due')">Due</label>
+			<label><input type='checkbox' ng-click="displayToggle('created')">Ceated</label>
+		</div>
+	
 <!--DOCUMENT SHOW START-->
-		<form ng-show='editing' class='doc-window'>
+		<form ng-show='docEdit' class='doc-window'>
 			<div class='doc-entry'>
 				<textarea class='doc-text' ng-model='docText'></textarea>
 				<button ng-click='saveDoc(docInfo._id)'>Save</button>
@@ -62,57 +70,57 @@
 		<table id='tbl'>
 			<thead>
 				<th ng-click="sortCol('name')">Task Name  <span class="glyphicon glyphicon-sort"></span></th>
-				<th ng-click="sortCol('projects')">Related Projects  <span class="glyphicon glyphicon-sort"></span></th>
-				<th ng-click="sortCol('goals')">Related Goals <span class="glyphicon glyphicon-sort"></span></th>	
-				<th ng-click="sortCol('skills')">Related Skills  <span class="glyphicon glyphicon-sort"></span></th>
-				<th ng-click="sortCol('status')">Status  <span class="glyphicon glyphicon-sort"></span></th>
-				<th ng-click="sortCol('due')">Due Date  <span class="glyphicon glyphicon-sort"></span></th>
-				<th ng-click="sortCol('created')">Date Created  <span class="glyphicon glyphicon-sort"></span></th>
+				<th ng-show='display.projects' ng-click="sortCol('projects')">Related Projects  <span class="glyphicon glyphicon-sort"></span></th>
+				<th ng-show='display.goals' ng-click="sortCol('goals')">Related Goals <span class="glyphicon glyphicon-sort"></span></th>	
+				<th ng-show='display.skills' ng-click="sortCol('skills')">Related Skills  <span class="glyphicon glyphicon-sort"></span></th>
+				<th ng-show='display.status' ng-click="sortCol('status')">Status  <span class="glyphicon glyphicon-sort"></span></th>
+				<th ng-show='display.due' ng-click="sortCol('due')">Due Date  <span class="glyphicon glyphicon-sort"></span></th>
+				<th ng-show='display.created' ng-click="sortCol('created')">Date Created  <span class="glyphicon glyphicon-sort"></span></th>
 				<th>DOCs</th>
 				<th>DELETE</th>
 			</thead>
 			<tbody>
 				<tr>
 					<td><input class='box' type="text" placeholder="Name" ng-model="formData.name"></td>
-					<td><input class='box' type="text" placeholder="Projects" ng-model="formData.projects"></td>
-					<td><input class='box' type="text" placeholder="Goals" ng-model="formData.goals"></td>
-					<td><input class='box' type="text" placeholder="Skills" ng-model="formData.skills"></td>
-					<td><input class='box' type="text" placeholder="Status" ng-model="formData.status"></td>
-					<td><input class='box' type="text" placeholder="Due Date" ng-model="formData.due"></td>
-					<td><input class='box' type="text" placeholder="" ng-model="formData.created"></td>
+					<td ng-show='display.projects'><input class='box' type="text" placeholder="Projects" ng-model="formData.projects"></td>
+					<td ng-show='display.goals'><input class='box' type="text" placeholder="Goals" ng-model="formData.goals"></td>
+					<td ng-show='display.skills' ><input class='box' type="text" placeholder="Skills" ng-model="formData.skills"></td>
+					<td ng-show='display.status' ><input class='box' type="text" placeholder="Status" ng-model="formData.status"></td>
+					<td ng-show='display.due'><input class='box' type="text" placeholder="Due Date" ng-model="formData.due"></td>
+					<td ng-show='display.created'><input class='box' type="text" placeholder="" ng-model="formData.created"></td>
 					<td><button ng-click='clearEntry()'>clear</button></td>
 					<td><button type="submit" ng-click="createTask()">Add</button></td>
-					<td class='update-btn'>
+					<td>
 					</td>
 				</tr>
 				<tr ng-repeat="task in tasks | filter: filter_name | orderBy: sorted: reverse">
 					<td class='td-entry'>
 						<div class='output'>{{task.name}}</div>
-						<input class='entry-off' type='text' ng-model="cells[task._id.toString()+'name']" value="task.name">
+						<input class='entry' ng-show='editing' type='text' ng-model="cells[task._id.toString()+'name']" value="task.name">
 					</td>
-					<td class='td-entry'>
+					<td class='td-entry' ng-show='display.projects'>
 						<div class='output'>{{task.projects}}</div>
-						<input class='entry-off' type='text' ng-model="cells[task._id.toString()+'projects']">
+						<input class='entry' ng-show='editing' type='text' ng-model="cells[task._id.toString()+'projects']">
 					</td>
-					<td class='td-entry'>
+					<td ng-show='display.goals' class='td-entry'>
 						<div class='output'>{{task.goals}}</div>
-						<input class='entry-off' type='text' ng-model="cells[task._id.toString()+'goals']">
+						<input class='entry' ng-show='editing' type='text' ng-model="cells[task._id.toString()+'goals']">
 					</td>
-					<td class='td-entry'>
+					<td ng-show='display.skills' class='td-entry'>
 						<div class='output'>{{task.skills}}</div>
-						<input class='entry-off' type='text' ng-model="cells[task._id.toString()+'skills']">
+						<input class='entry' ng-show='editing' type='text' ng-model="cells[task._id.toString()+'skills']">
 					</td>
-					<td class='td-entry'>
+					<td ng-show='display.status' class='td-entry'>
 						<div class='output'>{{task.status}}</div>
-						<input class='entry-off' type='text' ng-model="cells[task._id.toString()+'status']">
+						<input class='entry' ng-show='editing' type='text' ng-model="cells[task._id.toString()+'status']">
 					</td>
-					<td class='td-entry'>
+					<td ng-show='display.due' class='td-entry'>
 						<div class='output'>{{task.due}}</div>
-						<input class='entry-off' type='text' ng-model="cells[task._id.toString()+'due']">
+						<input class='entry' ng-show='editing' type='text' ng-model="cells[task._id.toString()+'due']">
 					</td>
-					<td class='td-entry'>
+					<td ng-show='display.created' class='td-entry'>
 						<div class='output'>{{task.created}}</div>
-						<input class='entry-off' type='text' ng-model="cells[task._id.toString()+'created']">
+						<input class='entry' ng-show='editing' type='text' ng-model="cells[task._id.toString()+'created']">
 					</td>
 					
 					<td>
@@ -121,12 +129,14 @@
 					<td class='btn-del'>
 						<input type="checkbox" ng-click="deleteTask(task._id)">
 					</td>
-					<td class='update-btn'>
-						<button type='text' ng-click="updateInfoAll(task._id)">UPDATE</button>
+					<td ng-show='editing'>
+						<button ng-click="updateInfoAll(task._id)">UPDATE</button>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-	
+<!--HIDDEN CSSED-->
+
 	</div>
 </div>
+

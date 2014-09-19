@@ -1,7 +1,11 @@
 angular.module('ProjectServiceMod', [])
 
-	.factory('Projects', ['$http',function($http) {
+	.factory('ProjectsFactory', ['$http',function($http) {
 		return {
+			update : function(data) {
+				console.log("inside projects factory");
+				return $http.post('/api/projects/update',data);
+			},
 			get : function() {
 	
 				return $http.get('/api/projects');

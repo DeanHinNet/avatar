@@ -7,3 +7,20 @@ module.exports = mongoose.model('User', {
 	email: String,
 	password: String
 });
+
+/*
+	preferences: {
+		display: {
+			tasks: {
+				name: Boolean;
+				projects: Boolean;
+				goals: Boolean;
+				status: Boolean;
+				due: Boolean;
+				created: Boolean;
+				docs: Boolean;
+			},
+			projects: {}
+		}
+	};
+*/

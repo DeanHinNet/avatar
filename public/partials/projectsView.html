@@ -1,4 +1,5 @@
 <script src='js/avatar.js'></script>
+
 <div ng-controller="ProjectsController">
 	
 	<h1>Projects: Related Goals and Skills</h1>
@@ -87,9 +88,7 @@
 					
 					<td><button ng-click='clearEntry()'>clear</button></td>
 					<td><button type="submit" ng-click="createProject()">Add</button></td>
-					<td class='update-btn'>
-						<button>Update All</button>
-					</td>
+					
 				</tr>
 				<tr ng-repeat="project in projects | filter: filter_name | orderBy: sorted: reverse">
 					<td class='td-entry'>
@@ -136,7 +135,7 @@
 						<input type="checkbox" ng-click="deleteProject(project._id)">
 					</td>
 					<td class='update-btn'>
-						<button type='text' ng-click="updateInfoAll(project._id)">UPDATE</button>
+						<button class='btn-update' ng-click="updateInfoAll(project._id)">UPDATE</button>
 					</td>
 				</tr>
 			</tbody>
