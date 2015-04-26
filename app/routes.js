@@ -27,9 +27,11 @@ module.exports = function(app) {
 		else
 			res.sendfile('./public/error.html');
 	});
+
 	app.post('/login', function(req, res){
 		res.sendfile('./public/home.html');
 	});
+
 	//TASKS CRUD
 	app.post('/api/tasks', function(req, res) {
 		Task.create({
@@ -51,6 +53,7 @@ module.exports = function(app) {
 		});
 
 	});
+
 	app.get('/api/tasks', function(req, res) {
 		Task.find(function(err, tasks) {
 			if (err)
@@ -274,7 +277,23 @@ module.exports = function(app) {
 
 		});
 	});
+	app.post('/api/projects/update', function(req,res){
 
+			updateData = req.body;
+			myID = req.body._id;
+
+			delete updateData._id;
+
+			Project.update({ _id: myID}, updateData, {multi:false}, function(err, data){
+				if (err)
+					res.send(err)
+				Project.find(function(err, data){
+					if (err)
+						res.send(err);
+					res.json(data);
+				});
+			});
+	});
 	app.delete('/api/projects/:project_id', function(req, res) {
 		Project.remove({
 			_id : req.params.project_id

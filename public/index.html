@@ -31,10 +31,10 @@
 </head>
 <body> 
 	
-	<a href="/">Home</a> | <a href="#/skills">Skills</a> | <a href="#/tasks">Tasks</a><br>
+	<a href="/">Home</a> | <a href="#/tasks">Tasks</a> | <a href="#/skills">Skills</a> <br>
 	
-	BETA VERSION: <a href="#/projects">Projects</a> | <a href="#/goals">Goals</a> | <a href="#/works">Works </a>| <a href="#/resources">Resources</a> | <a href="#/social">Get Social!</a>
-
+	<div>BETA VERSION: <a href="#/projects">Projects</a> | <a href="#/goals">Goals</a></div>
+	<div>SUPER BETA VERSION: <a href="#/works">Works </a>| <a href="#/resources">Resources</a> | <a href="#/social">Get Social!</a> | <a href="#/visual">Visualizations</a></div>
 	<div ng-view="">
 	</div>
 
@@ -81,9 +81,9 @@ angular.module('configuration',[])
 			{
 				templateUrl: 'partials/socialView.html'
 			})
-			.when('/tour',
+			.when('/visual',
 			{
-				templateUrl: 'partials/tourView.html'
+				templateUrl: 'partials/visualView.html'
 			})
 		});
 </script>

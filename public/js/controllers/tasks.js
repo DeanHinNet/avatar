@@ -8,7 +8,26 @@ angular.module('TasksControllerMod', [])
 		$scope.docText = {};
 		$scope.sorted = 'projects';
 		$scope.reverse = 'reverse';
+		$scope.editing = false;
+		$scope.display = {
+			name: true,
+			projects: true,
+			goals: true,
+			skills: true,
+			status: true,
+			due: true,
+			created: true,
+			fieldSelect: false
+		};
+
+		$scope.displayToggle = function(selection){
+			$scope.display[selection]= !$scope.display[selection];
+		};
 		
+		$scope.editFields = function(){
+			$scope.editing = !$scope.editing;
+		};
+
 		$scope.sortCol = function(criteria){
 			console.log(criteria);
 			$scope.sorted = criteria;
@@ -44,17 +63,17 @@ angular.module('TasksControllerMod', [])
 			entry = {};
 			entry['_id']=id;
 			entry['name']=$scope.cells[myID+'name'];
-			entry['category']=$scope.cells[myID+'category'];
-			entry['sub']=$scope.cells[myID+'sub'];
-			entry['path']=$scope.cells[myID+'path'];
-			entry['points']=$scope.cells[myID+'points'];
+			entry['projects']=$scope.cells[myID+'projects'];
+			entry['goals']=$scope.cells[myID+'goals'];
+			entry['skills']=$scope.cells[myID+'skills'];
+			entry['status']=$scope.cells[myID+'status'];
+			entry['due']=$scope.cells[myID+'due'];
+			entry['created']=$scope.cells[myID+'created'];
 			
 			TasksFactory.update(entry)
 				.success(function(data){
 					$scope.cells = {};
 					$scope.tasks = data;
-
-		
 			 })
 		};
 		$scope.deleteTask = function(id) {
@@ -71,7 +90,7 @@ angular.module('TasksControllerMod', [])
 				return (data._id==id) ? true:false;
 			});
 			$scope.docInfo = object[0];
-			$scope.editing = true;
+			$scope.docEdit = true;
 
 			//grab the document from the database
 			TasksFactory.readDoc('tasks', id)
@@ -95,7 +114,7 @@ angular.module('TasksControllerMod', [])
 		};
 
 		$scope.stopDoc = function(){
-			$scope.editing = false;
+			$scope.docEdit = false;
 		};
 
 		$scope.select = function(related, selection){
